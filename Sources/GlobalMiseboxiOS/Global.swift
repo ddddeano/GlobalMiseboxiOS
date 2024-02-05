@@ -16,4 +16,9 @@ public protocol ManagerDelegate: AnyObject {
 public struct DocCollection {
     public var doc: String
     public var collection: String
+    
+    public init(doc: String, collection: String) {
+          self.doc = doc
+          self.collection = collection
+      }
 }
