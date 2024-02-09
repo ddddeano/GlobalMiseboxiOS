@@ -34,10 +34,7 @@ public enum Env {
     }
     
     var onSelect: () -> Bool {
-        switch self {
-        case .edit, .content, .notification:
-            return { true }
-        }
+        return { true }
     }
 }
 
@@ -147,7 +144,7 @@ public struct AvatarView: View {
                     Image(systemName: "pencil.circle")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(.white) 
+                        .foregroundColor(.white)
                         .frame(width: width * 0.15, height: height * 0.15)
                 }
                 
