@@ -8,35 +8,53 @@
 import Foundation
 import SwiftUI
 
+import SwiftUI
+
 public enum Env {
-    case edit, content(Bool), notification(Bool)
+    case edit(action: () -> Void)
+    case content(show: Bool, action: () -> Void)
+    case notification(show: Bool, action: () -> Void)
     
+    // Provides an array of colors based on the environment
     var colors: [Color] {
         switch self {
-        case .content(let show) where show:
+        case .content(let show, _) where show:
             return [NewContentColors.color1, NewContentColors.color2, NewContentColors.color2, NewContentColors.color1]
-        case .notification(let show) where show:
+        case .notification(let show, _) where show:
             return [NotificationColors.color1, NotificationColors.color2, NotificationColors.color2, NotificationColors.color1]
         case .edit:
+            // Assuming no specific colors for edit or an empty array as a placeholder
             return []
-        default:
+        case .content(_, _),
+             .notification(_, _):
+            // For cases where either `show` is false or you don't care about the action
+            // You might return an empty array or a default color set
             return []
         }
     }
+
     
+    // Determines if the ring should be shown based on the environment
     var shouldShowRing: Bool {
         switch self {
-        case .content(let show), .notification(let show):
+        case .content(let show, _), .notification(let show, _):
             return show
-        default:
+        case .edit:
             return false
         }
     }
     
-    var onSelect: () -> Bool {
-        return { true }
+    // Executes the action associated with the current environment
+    func onSelect() {
+        switch self {
+        case .edit(let action),
+             .content(_, let action),
+             .notification(_, let action):
+            action()
+        }
     }
 }
+
 
 
 public struct AvatarView: View {
@@ -66,7 +84,7 @@ public struct AvatarView: View {
                 .offset(x: width * 0.33, y: width * 0.33)
         }
         .onTapGesture {
-            _ = env.onSelect()
+            env.onSelect()
         }
     }
     
@@ -146,23 +164,27 @@ public struct AvatarView: View {
                         .scaledToFit()
                         .foregroundColor(.white)
                         .frame(width: width * 0.15, height: height * 0.15)
-                }
-                
-            case .content(let show) where show, .notification(let show) where show:
+                }            case .content(show: let show, action: let action):
                 Circle()
                     .fill(LinearGradient(gradient: Gradient(colors: env.colors), startPoint: .topLeading, endPoint: .bottomTrailing))
                     .overlay(
                         Circle().stroke(Color.black, lineWidth: width * 0.01) // Adding the black stroke here
                     )
-                
-            default:
-                EmptyView()
+            case .notification(show: let show, action: let action):
+                Circle()
+                    .fill(LinearGradient(gradient: Gradient(colors: env.colors), startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .overlay(
+                        Circle().stroke(Color.black, lineWidth: width * 0.01) // Adding the black stroke here
+                    )
             }
         }
     }
 }
 
-// Extend AvatarView with a preview provider
+// Eximport SwiftUI
+
+// Ensure this is defined somewhere accessible by the preview
+
 struct AvatarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -170,7 +192,9 @@ struct AvatarView_Previews: PreviewProvider {
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .edit,
+                env: .edit(action: {
+                    print("Edit tapped")
+                }),
                 palette: devPalette1
             )
             .previewLayout(.sizeThatFits)
@@ -181,7 +205,9 @@ struct AvatarView_Previews: PreviewProvider {
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .content(true),
+                env: .content(show: true, action: {
+                    print("Content true tapped")
+                }),
                 palette: devPalette1
             )
             .previewLayout(.sizeThatFits)
@@ -192,7 +218,9 @@ struct AvatarView_Previews: PreviewProvider {
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .notification(true),
+                env: .notification(show: true, action: {
+                    print("Notification tapped")
+                }),
                 palette: devPalette1
             )
             .previewLayout(.sizeThatFits)
@@ -203,7 +231,9 @@ struct AvatarView_Previews: PreviewProvider {
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .content(false),
+                env: .content(show: false, action: {
+                    print("Content false tapped")
+                }),
                 palette: devPalette1
             )
             .previewLayout(.sizeThatFits)
