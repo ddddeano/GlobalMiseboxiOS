@@ -61,7 +61,7 @@ public struct Palette {
 
 // MARK: - Developer Palettes
 public let devPalette1 = Palette(
-    primaryColor: .BlueberryBlue,
+    primaryColor: .KaleGreen,
     primaryColorCompliment: .SkyBerryBlue,
     color3: .MatchaGreen,
     color4: .KaleGreen,

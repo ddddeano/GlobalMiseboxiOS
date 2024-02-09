@@ -8,15 +8,21 @@
 import Foundation
 import SwiftUI
 
-import SwiftUI
-
-import SwiftUI
-
-// Define the environment for the avatar view
+// Define your environment enum, including conditions for showing content and handling taps
 public enum Env {
     case edit
     case content(show: Bool)
     case notification(show: Bool)
+    
+    // Determines if the ring should be shown based on the environment
+    var shouldShowRing: Bool {
+        switch self {
+        case .content(let show), .notification(let show):
+            return show
+        case .edit:
+            return false
+        }
+    }
 }
 
 // AvatarView definition
@@ -25,9 +31,9 @@ public struct AvatarView: View {
     var width: CGFloat
     var height: CGFloat
     var env: Env
-    var onTap: () -> Void
-    var palette: Palette
-    
+    var onTap: () -> Void  // Closure for handling tap
+    var palette: Palette  // Color palette for the view
+
     public init(imageUrl: String, width: CGFloat, height: CGFloat, env: Env, onTap: @escaping () -> Void, palette: Palette) {
         self.imageUrl = imageUrl
         self.width = width
@@ -39,41 +45,87 @@ public struct AvatarView: View {
     
     public var body: some View {
         ZStack {
-            Circle()
-                .fill(
-                    LinearGradient(
-                        gradient: Gradient(colors: [palette.primaryColor, palette.primaryColorCompliment, palette.primaryColor]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: width, height: height)
-                .overlay(Circle().stroke(Color.black, lineWidth: width * 0.01))
-            
-            AsyncImage(url: URL(string: imageUrl)) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: width, height: height)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.black, lineWidth: width * 0.02))
-                case .failure:
-                    Image(systemName: "exclamationmark.triangle")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(.red)
-                        .frame(width: width * 0.6, height: height * 0.6)
-                @unknown default:
-                    EmptyView()
-                }
+            circleBackground()
+            if env.shouldShowRing {
+                showRing()
             }
+            image()
+            bubble()
+                .frame(width: width * 0.20, height: height * 0.20)
+                .offset(x: width * 0.33, y: width * 0.33)
         }
         .onTapGesture(perform: onTap)
     }
+    
+    private func circleBackground() -> some View {
+        Circle()
+            .fill(
+                LinearGradient(
+                    gradient: Gradient(colors: [palette.primaryColor, palette.primaryColorCompliment, palette.primaryColor]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .frame(width: width, height: height)
+            .overlay(
+                Circle().stroke(Color.black, lineWidth: width * 0.01)
+            )
+    }
+    
+    private func showRing() -> some View {
+        Circle()
+            .stroke(lineWidth: 4)
+            .foregroundColor(.blue) // Customize this as needed
+            .frame(width: width * 0.85, height: height * 0.85)
+            .overlay(
+                Circle().stroke(Color.black, lineWidth: width * 0.01)
+            )
+    }
+    
+    private func image() -> some View {
+        AsyncImage(url: URL(string: imageUrl)) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+            case .success(let image):
+                image.resizable().scaledToFill().frame(width: width, height: height).clipShape(Circle())
+            case .failure:
+                Image(systemName: "exclamationmark.triangle").foregroundColor(.red).frame(width: width * 0.6, height: height * 0.6)
+            @unknown default:
+                EmptyView()
+            }
+        }
+    }
+    
+    private func bubble() -> some View {
+        Group {
+            switch env {
+            case .edit:
+                Image(systemName: "pencil.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.white)
+                    .background(Circle().fill(palette.primaryColor))
+                    .frame(width: width * 0.15, height: height * 0.15)
+
+            case .content(let show) where show:
+                // New Content Bubble Configuration
+                Circle()
+                    .fill(LinearGradient(gradient: Gradient(colors: [NewContentColors.color1, NewContentColors.color2]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .frame(width: width * 0.20, height: height * 0.20)
+
+            case .notification(let show) where show:
+                Circle()
+                    .fill(LinearGradient(gradient: Gradient(colors: [NotificationColors.color1, NotificationColors.color2]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .frame(width: width * 0.20, height: height * 0.20)
+
+            default:
+                EmptyView()
+            }
+        }
+    }
+
+
 }
 
 // Preview provider for AvatarView
