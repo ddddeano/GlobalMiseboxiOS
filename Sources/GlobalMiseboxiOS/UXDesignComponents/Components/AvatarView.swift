@@ -15,7 +15,7 @@ public enum Env {
     case notification(show: Bool)
     
     // Determines if the ring should be shown based on the environment
-    var shouldShowRing: Bool {
+    var shouldShow: Bool {
         switch self {
         case .content(let show), .notification(let show):
             return show
@@ -46,7 +46,7 @@ public struct AvatarView: View {
     public var body: some View {
         ZStack {
             circleBackground()
-            if env.shouldShowRing {
+            if env.shouldShow {
                 showRing()
             }
             image()
@@ -61,7 +61,7 @@ public struct AvatarView: View {
         Circle()
             .fill(
                 LinearGradient(
-                    gradient: Gradient(colors: [palette.primaryColor, palette.primaryColorCompliment, palette.primaryColor]),
+                    gradient: Gradient(colors: [palette.color6, palette.color8, palette.color6]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -75,7 +75,7 @@ public struct AvatarView: View {
     private func showRing() -> some View {
         Circle()
             .stroke(lineWidth: 4)
-            .foregroundColor(.blue) // Customize this as needed
+            .foregroundColor(.white) // Customize this as needed
             .frame(width: width * 0.85, height: height * 0.85)
             .overlay(
                 Circle().stroke(Color.black, lineWidth: width * 0.01)
@@ -88,9 +88,21 @@ public struct AvatarView: View {
             case .empty:
                 ProgressView()
             case .success(let image):
-                image.resizable().scaledToFill().frame(width: width, height: height).clipShape(Circle())
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: width * (env.shouldShow ? 0.8 : 0.9), height: height * 0.9)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(Color(.black), lineWidth: width * 0.02)
+                    )
             case .failure:
-                Image(systemName: "exclamationmark.triangle").foregroundColor(.red).frame(width: width * 0.6, height: height * 0.6)
+                Image(systemName: "exclamationmark.triangle")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.red)
+                    .frame(width: width * 0.6, height: height * 0.6)
             @unknown default:
                 EmptyView()
             }
@@ -106,18 +118,14 @@ public struct AvatarView: View {
                     .scaledToFit()
                     .foregroundColor(.white)
                     .background(Circle().fill(palette.primaryColor))
-                    .frame(width: width * 0.15, height: height * 0.15)
-
             case .content(let show) where show:
                 // New Content Bubble Configuration
                 Circle()
                     .fill(LinearGradient(gradient: Gradient(colors: [NewContentColors.color1, NewContentColors.color2]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .frame(width: width * 0.20, height: height * 0.20)
 
             case .notification(let show) where show:
                 Circle()
                     .fill(LinearGradient(gradient: Gradient(colors: [NotificationColors.color1, NotificationColors.color2]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .frame(width: width * 0.20, height: height * 0.20)
 
             default:
                 EmptyView()
