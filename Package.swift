@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "GlobalMiseboxiOS",
+    platforms: [
+        .iOS(.v16) // Ensure your platform version is correct
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
