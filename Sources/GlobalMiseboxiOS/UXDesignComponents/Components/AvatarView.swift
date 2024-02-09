@@ -31,9 +31,9 @@ public struct AvatarView: View {
                 .fill(
                     LinearGradient(
                         gradient: Gradient(colors: [
-                            palette.color1,
-                            palette.color2,
-                            palette.color1 // Repeating the first color for a subtle flash effect
+                            palette.primaryColor,
+                            palette.primaryColorCompliment,
+                            palette.primaryColor
                         ]),
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
