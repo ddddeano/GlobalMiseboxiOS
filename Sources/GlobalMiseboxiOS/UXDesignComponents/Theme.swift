@@ -1,41 +1,42 @@
-//
-//  Theme.swift
-//
-//
-//  Created by Daniel Watson on 09.02.2024.
-//
-
-import Foundation
 import SwiftUI
 
+// MARK: - Color Definitions
+public extension Color {
+    static let BlueberryBlue = Color(red: 0.05, green: 0.20, blue: 0.35)
+    static let SkyBerryBlue = Color(red: 0.60, green: 0.80, blue: 0.90)
+    static let KaleGreen = Color(red: 0.10, green: 0.45, blue: 0.10)
+    static let LavenderHoney = Color(red: 0.50, green: 0.40, blue: 0.80)
+    static let VanillaCream = Color(red: 0.95, green: 0.95, blue: 0.90)
+    static let TomatoRed = Color(red: 0.99, green: 0.37, blue: 0.33)
+    static let WatermelonPink = Color(red: 0.99, green: 0.56, blue: 0.67)
+    static let BlueCuracao = Color(red: 0.45, green: 0.76, blue: 0.98)
+    static let RaspberryMousse = Color(red: 1.00, green: 0.94, blue: 0.96)
+    static let MintLeaf = Color(red: 0.00, green: 0.65, blue: 0.58)
+    static let StrawberryFrost = Color(red: 0.98, green: 0.22, blue: 0.36)
+    static let MangoTango = Color(red: 0.95, green: 0.73, blue: 0.31)
+    static let GrapeSoda = Color(red: 0.33, green: 0.35, blue: 0.65)
+    static let PersimmonOrange = Color(red: 1.00, green: 0.44, blue: 0.37)
+    static let ArcticBlueberry = Color(red: 0.43, green: 0.61, blue: 0.76)
+    static let LemonZest = Color(red: 1.00, green: 0.98, blue: 0.80)
+    static let SaffronSpice = Color(red: 0.96, green: 0.77, blue: 0.19)
+    static let PaprikaRed = Color(red: 0.91, green: 0.34, blue: 0.24)
+    static let AvocadoGreen = Color(red: 0.24, green: 0.82, blue: 0.44)
+    static let MatchaGreen = Color(red: 0.68, green: 0.85, blue: 0.70)
+    static let CoconutMilk = Color(red: 0.97, green: 0.97, blue: 0.97)
+}
 
+// MARK: - Specific Use Case Colors
+struct NotificationColors {
+    static let color1 = Color.AvocadoGreen
+    static let color2 = Color.MatchaGreen
+}
 
-// pallete
-public let BlueberryBlue = Color(red: 0.05, green: 0.20, blue: 0.35) // HEX: #0D3359
-public let SkyBerryBlue = Color(red: 0.60, green: 0.80, blue: 0.90) // HEX: #99CCFF
-public let MatchaGreen = Color(red: 0.68, green: 0.85, blue: 0.70) // HEX: #ADD8B3
-public let KaleGreen = Color(red: 0.10, green: 0.45, blue: 0.10) // HEX: #1A7331
-public let LavenderHoney = Color(red: 0.50, green: 0.40, blue: 0.80) // HEX: #8066CC
-public let VanillaCream = Color(red: 0.95, green: 0.95, blue: 0.90) // HEX: #F2F2E6
-public let TomatoRed = Color(red: 0.99, green: 0.37, blue: 0.33) // HEX: #FC5E54
-public let WatermelonPink = Color(red: 0.99, green: 0.56, blue: 0.67) // HEX: #FC8FAC
-public let BlueCuracao = Color(red: 0.45, green: 0.76, blue: 0.98) // HEX: #73C2FB
-public let RaspberryMousse = Color(red: 1.00, green: 0.94, blue: 0.96) // HEX: #FFF0F5
-public let MintLeaf = Color(red: 0.00, green: 0.65, blue: 0.58) // HEX: #00A896
-public let StrawberryFrost = Color(red: 0.98, green: 0.22, blue: 0.36) // HEX: #FA385B
-public let AvocadoGreen = Color(red: 0.24, green: 0.82, blue: 0.44) // HEX: #3DD070
-public let MangoTango = Color(red: 0.95, green: 0.73, blue: 0.31) // HEX: #F2BA50
-public let GrapeSoda = Color(red: 0.33, green: 0.35, blue: 0.65) // HEX: #545AA1
-public let PersimmonOrange = Color(red: 1.00, green: 0.44, blue: 0.37) // HEX: #FF7060
-public let ArcticBlueberry = Color(red: 0.43, green: 0.61, blue: 0.76) // HEX: #6E9CC2
+struct NewContentColors {
+    static let color1 = Color.SaffronSpice
+    static let color2 = Color.PaprikaRed
+}
 
-// system
-public let LemonZest = Color(red: 1.00, green: 0.98, blue: 0.80) // HEX: #FFFACD
-
-import SwiftUI
-
-// Assuming color definitions and LemonZest color are defined in the global scope.
-
+// MARK: - Palette Configuration
 public struct Palette {
     public var primaryColor: Color
     public var primaryColorCompliment: Color
@@ -56,45 +57,38 @@ public struct Palette {
         self.color7 = color7
         self.color8 = color8
     }
-    
-    public func backgroundGradient() -> LinearGradient {
-        LinearGradient(
-            gradient: Gradient(colors: [primaryColor, LemonZest, primaryColorCompliment]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-    }
 }
 
+// MARK: - Developer Palettes
 public let devPalette1 = Palette(
-    primaryColor: BlueberryBlue,
-    primaryColorCompliment: SkyBerryBlue,
-    color3: MatchaGreen,
-    color4: KaleGreen,
-    color5: LavenderHoney,
-    color6: VanillaCream,
-    color7: TomatoRed,
-    color8: WatermelonPink
+    primaryColor: .BlueberryBlue,
+    primaryColorCompliment: .SkyBerryBlue,
+    color3: .MatchaGreen,
+    color4: .KaleGreen,
+    color5: .LavenderHoney,
+    color6: .VanillaCream,
+    color7: .TomatoRed,
+    color8: .WatermelonPink
 )
 
 public let devPalette2 = Palette(
-    primaryColor: LemonZest,
-    primaryColorCompliment: BlueCuracao,
-    color3: RaspberryMousse,
-    color4: MintLeaf,
-    color5: StrawberryFrost,
-    color6: AvocadoGreen,
-    color7: MangoTango,
-    color8: GrapeSoda
+    primaryColor: .LemonZest,
+    primaryColorCompliment: .BlueCuracao,
+    color3: .RaspberryMousse,
+    color4: .MintLeaf,
+    color5: .StrawberryFrost,
+    color6: .AvocadoGreen,
+    color7: .MangoTango,
+    color8: .GrapeSoda
 )
 
 public let devPalette3 = Palette(
-    primaryColor: PersimmonOrange,
-    primaryColorCompliment: ArcticBlueberry,
-    color3: BlueberryBlue,
-    color4: SkyBerryBlue,
-    color5: MatchaGreen,
-    color6: KaleGreen,
-    color7: LavenderHoney,
-    color8: VanillaCream
+    primaryColor: .PersimmonOrange,
+    primaryColorCompliment: .ArcticBlueberry,
+    color3: .BlueberryBlue,
+    color4: .SkyBerryBlue,
+    color5: .MatchaGreen,
+    color6: .KaleGreen,
+    color7: .LavenderHoney,
+    color8: .VanillaCream
 )
