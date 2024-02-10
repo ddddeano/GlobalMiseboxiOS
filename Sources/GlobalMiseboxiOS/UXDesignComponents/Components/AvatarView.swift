@@ -8,13 +8,11 @@
 import Foundation
 import SwiftUI
 
-// Define your environment enum, including conditions for showing content and handling taps
 public enum Env {
     case edit
     case content(show: Bool)
     case notification(show: Bool)
     
-    // Determines if the ring should be shown based on the environment
     var shouldShow: Bool {
         switch self {
         case .content(let show), .notification(let show):
@@ -25,15 +23,14 @@ public enum Env {
     }
 }
 
-// AvatarView definition
 public struct AvatarView: View {
     var imageUrl: String
     var width: CGFloat
     var height: CGFloat
     var env: Env
-    var onTap: () -> Void  // Closure for handling tap
-    var palette: Palette  // Color palette for the view
-
+    var onTap: () -> Void
+    var palette: Palette
+    
     public init(imageUrl: String, width: CGFloat, height: CGFloat, env: Env, onTap: @escaping () -> Void, palette: Palette) {
         self.imageUrl = imageUrl
         self.width = width
@@ -59,18 +56,13 @@ public struct AvatarView: View {
     
     private func circleBackground() -> some View {
         Circle()
-            .fill(
-                LinearGradient(
-                    gradient: Gradient(colors: [palette.color6, palette.color8, palette.color6]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
+            .fill(palette.highlightGradient) // Use the highlight gradient from the palette
             .frame(width: width, height: height)
             .overlay(
                 Circle().stroke(Color.black, lineWidth: width * 0.01)
             )
     }
+
     
     private func showRing() -> some View {
         Circle()
@@ -91,7 +83,7 @@ public struct AvatarView: View {
                 image
                     .resizable()
                     .scaledToFill()
-                    .frame(width: width * (env.shouldShow ? 0.8 : 0.9), height: height * 0.9)
+                    .frame(width: width * (env.shouldShow ? 0.9 : 1))
                     .clipShape(Circle())
                     .overlay(
                         Circle()
@@ -135,19 +127,72 @@ public struct AvatarView: View {
 
 
 }
+import SwiftUI
 
-// Preview provider for AvatarView
 struct AvatarView_Previews: PreviewProvider {
+    static let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3) // Adjust the count if you want a different layout
+
     static var previews: some View {
-        AvatarView(
-            imageUrl: "https://example.com/image.jpg",
-            width: 100,
-            height: 100,
-            env: .edit,
-            onTap: { print("Avatar tapped") },
-            palette: devPalette1
-        )
+        ZStack {
+            // Background using primary gradient from devPalette1
+            Rectangle()
+                .fill(devPalette1.backgroundGradient)
+                .edgesIgnoringSafeArea(.all)
+            
+            // Display avatars in a grid
+            LazyVGrid(columns: columns, spacing: 20) {
+                // Edit Environment Avatar
+                AvatarView(
+                    imageUrl: defaultImage,
+                    width: 100,
+                    height: 100,
+                    env: .edit,
+                    onTap: { print("Edit Avatar tapped") },
+                    palette: devPalette1
+                )
+
+                // Content Environment Avatar (show: true)
+                AvatarView(
+                    imageUrl: defaultImage,
+                    width: 100,
+                    height: 100,
+                    env: .content(show: true),
+                    onTap: { print("Content (show: true) Avatar tapped") },
+                    palette: devPalette1
+                )
+
+                // Content Environment Avatar (show: false)
+                AvatarView(
+                    imageUrl: defaultImage,
+                    width: 100,
+                    height: 100,
+                    env: .content(show: false),
+                    onTap: { print("Content (show: false) Avatar tapped") },
+                    palette: devPalette1
+                )
+
+                // Notification Environment Avatar (show: true)
+                AvatarView(
+                    imageUrl: defaultImage,
+                    width: 100,
+                    height: 100,
+                    env: .notification(show: true),
+                    onTap: { print("Notification (show: true) Avatar tapped") },
+                    palette: devPalette1
+                )
+
+                // Notification Environment Avatar (show: false)
+                AvatarView(
+                    imageUrl: defaultImage,
+                    width: 100,
+                    height: 100,
+                    env: .notification(show: false),
+                    onTap: { print("Notification (show: false) Avatar tapped") },
+                    palette: devPalette1
+                )
+            }
+            .padding()
+        }
         .previewLayout(.sizeThatFits)
-        .padding()
     }
 }
