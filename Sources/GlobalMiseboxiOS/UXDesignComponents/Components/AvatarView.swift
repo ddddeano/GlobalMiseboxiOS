@@ -20,15 +20,13 @@ public struct AvatarView: View {
     var height: CGFloat
     var env: Env
     var onTap: () -> Void
-    var palette: Palette
     
-    public init(imageUrl: String, width: CGFloat, height: CGFloat, env: Env, onTap: @escaping () -> Void, palette: Palette) {
+    public init(imageUrl: String, width: CGFloat, height: CGFloat, env: Env, onTap: @escaping () -> Void) {
         self.imageUrl = imageUrl
         self.width = width
         self.height = height
         self.env = env
         self.onTap = onTap
-        self.palette = palette
     }
     
     public var body: some View {
@@ -55,7 +53,7 @@ public struct AvatarView: View {
                     .scaledToFill()
                     .clipShape(Circle())
                     .overlay(
-                        Circle().stroke(palette.borderColor, lineWidth: width * 0.02)
+                        Circle().stroke(🎨.border, lineWidth: width * 0.02)
                     )
             case .failure:
                 Image(systemName: "exclamationmark.triangle")
@@ -77,19 +75,19 @@ public struct AvatarView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.white)
-                    .background(Circle().fill(palette.primaryColor))
+                    .background(Circle().fill(🎨.primaryColor))
                     .frame(width: width * 0.20, height: height * 0.20)
             )
         case .content(let show) where show:
             return AnyView(
                 Circle()
-                    .fill(Color.newContent)
+                    .fill(🎨.newContent)
                     .frame(width: width * 0.20, height: height * 0.20)
             )
         case .notification(let show) where show:
             return AnyView(
                 Circle()
-                    .fill(Color.newNotification)
+                    .fill(🎨.newNotification)
                     .frame(width: width * 0.20, height: height * 0.20)
             )
         default:
@@ -97,59 +95,55 @@ public struct AvatarView: View {
         }
     }
 }
-import SwiftUI
 
 struct AvatarView_Previews: PreviewProvider {
+    
     static var previews: some View {
+        
         VStack(spacing: 20) {
             Text("Preview")
                 .foregroundColor(.white)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 10).fill(userPalette.primaryColor))
+                .background(RoundedRectangle(cornerRadius: 10).fill(Pallet.shared.primaryColor))
             
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
                 env: .edit,
-                onTap: { print("Edit Avatar tapped") },
-                palette: userPalette
+                onTap: { print("Edit Avatar tapped") }
             )
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
                 env: .content(show: true),
-                onTap: { print("Content (show: true) Avatar tapped") },
-                palette: userPalette
+                onTap: { print("Content (show: true) Avatar tapped") }
             )
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
                 env: .content(show: false),
-                onTap: { print("Content (show: false) Avatar tapped") },
-                palette: userPalette
+                onTap: { print("Content (show: false) Avatar tapped") }
             )
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
                 env: .notification(show: true),
-                onTap: { print("Notification (show: true) Avatar tapped") },
-                palette: userPalette
+                onTap: { print("Notification (show: true) Avatar tapped") }
             )
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
                 env: .notification(show: false),
-                onTap: { print("Notification (show: false) Avatar tapped") },
-                palette: userPalette
+                onTap: { print("Notification (show: false) Avatar tapped") }
             )
         }
         .padding()
         .previewLayout(.sizeThatFits)
-        .background(userPalette.background.edgesIgnoringSafeArea(.all))
+        .background(Pallet.shared.background.edgesIgnoringSafeArea(.all))
     }
 }

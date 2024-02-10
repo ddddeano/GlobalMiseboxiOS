@@ -1,7 +1,11 @@
 import SwiftUI
 
 // MARK: - Extension to add custom color definitions
-import SwiftUI
+extension View {
+    var 🎨: Pallet {
+        Pallet.shared
+    }
+}
 
 public extension Color {
     static let BlueberryBlue = Color(red: 0.05, green: 0.20, blue: 0.35)
@@ -59,7 +63,11 @@ public class Pallet {
     }
     
     public var mode: Mode = .light
+    
+    
     public var primaryColor: Color = .BlueberryBlue
+    public var newContent: Color = .AvocadoGreen
+    public var newNotification: Color = .PaprikaRed
     
     private init() {}
     
