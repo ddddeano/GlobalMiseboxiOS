@@ -1,6 +1,8 @@
 import SwiftUI
 
-// MARK: - Food-based Color Definitions
+// MARK: - Extension to add custom color definitions
+import SwiftUI
+
 public extension Color {
     static let BlueberryBlue = Color(red: 0.05, green: 0.20, blue: 0.35)
     static let SkyBerryBlue = Color(red: 0.60, green: 0.80, blue: 0.90)
@@ -23,50 +25,61 @@ public extension Color {
     static let MatchaGreen = Color(red: 0.68, green: 0.85, blue: 0.70)
     static let CoconutMilk = Color(red: 0.97, green: 0.97, blue: 0.97)
     static let PersimmonOrange = Color(red: 1.00, green: 0.44, blue: 0.37)
-
-    // System Colors
-    static var newContent: Color {
-        return .PersimmonOrange
-    }
-    
-    static var newNotification: Color {
-        return .SaffronSpice
-    }
 }
+
+// MARK: - Extension to add color mixing capabilities
 
 extension Color {
-    func mixedWithBlack(fraction: CGFloat) -> Color {
-        guard let rgbColor = UIColor(self).cgColor.components, rgbColor.count >= 3 else {
-            return self // Return the original color if conversion fails
+
+    func mixed(with color: Color, fraction: CGFloat) -> Color {
+        guard let baseRGB = UIColor(self).cgColor.components, baseRGB.count >= 3 else {
+            return self
         }
-
-        // Calculate the new color components
-        let red = rgbColor[0] * (1 - fraction)
-        let green = rgbColor[1] * (1 - fraction)
-        let blue = rgbColor[2] * (1 - fraction)
-
-        return Color(red: Double(red), green: Double(green), blue: Double(blue))
+        
+        guard let mixRGB = UIColor(color).cgColor.components, mixRGB.count >= 3 else {
+            return self
+        }
+        
+        let mix = { (baseComponent: CGFloat, mixComponent: CGFloat) -> CGFloat in
+            (1 - fraction) * baseComponent + fraction * mixComponent
+        }
+        
+        return Color(red: Double(mix(baseRGB[0], mixRGB[0])),
+                     green: Double(mix(baseRGB[1], mixRGB[1])),
+                     blue: Double(mix(baseRGB[2], mixRGB[2])))
     }
 }
 
-public struct Palette {
-    public var primaryColor: Color
-
-    public init(primaryColor: Color) {
-        self.primaryColor = primaryColor
+// MARK: - Pallet Singleton for dynamic theme adaptation
+class Pallet {
+    static let shared = Pallet()
+    
+    enum Mode: CaseIterable {
+           case dark, light
+       }
+    var mode: Mode = .light
+    var primaryColor: Color = .BlueberryBlue
+    
+    private init() {}
+    
+    
+    var background: Color {
+        switch mode {
+        case .light:
+            return primaryColor.mixed(with: .black, fraction: 0.2)
+        case .dark:
+            return primaryColor.mixed(with: .white, fraction: 0.2)
+        }
     }
-
-    public var background: Color {
-        return primaryColor
-    }
-
-    public var borderColor: Color {
-        return primaryColor.mixedWithBlack(fraction: 0.8) 
+    
+    var border: Color {
+        switch mode {
+        case .light:
+            return primaryColor.mixed(with: .black, fraction: 0.8)
+        case .dark:
+            return primaryColor.mixed(with: .white, fraction: 0.8)
+        }
     }
 }
 
 
-
-
-// Example usage
-public let userPalette = Palette(primaryColor: .BlueCuracao)
