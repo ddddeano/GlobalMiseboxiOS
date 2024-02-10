@@ -51,19 +51,19 @@ extension Color {
 }
 
 // MARK: - Pallet Singleton for dynamic theme adaptation
-class Pallet {
-    static let shared = Pallet()
+public class Pallet {
+    public static let shared = Pallet()
     
-    enum Mode: CaseIterable {
-           case dark, light
-       }
-    var mode: Mode = .light
-    var primaryColor: Color = .BlueberryBlue
+    public enum Mode: CaseIterable {
+        case dark, light
+    }
+    
+    public var mode: Mode = .light
+    public var primaryColor: Color = .BlueberryBlue
     
     private init() {}
     
-    
-    var background: Color {
+    public var background: Color {
         switch mode {
         case .light:
             return primaryColor.mixed(with: .black, fraction: 0.2)
@@ -72,7 +72,7 @@ class Pallet {
         }
     }
     
-    var border: Color {
+    public var border: Color {
         switch mode {
         case .light:
             return primaryColor.mixed(with: .black, fraction: 0.8)
