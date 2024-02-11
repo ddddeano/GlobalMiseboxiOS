@@ -2,8 +2,8 @@ import SwiftUI
 
 // MARK: - Extension to add custom color definitions
 extension View {
-    var 🎨: Pallet {
-        Pallet.shared
+    var 🎨: Palette {
+        Palette.shared
     }
 }
 
@@ -55,22 +55,18 @@ extension Color {
 }
 
 // MARK: - Pallet Singleton for dynamic theme adaptation
-public class Pallet {
-    public static let shared = Pallet()
+
+public class Palette {
+    static let shared = Palette()
     
-    public enum Mode: CaseIterable {
-        case dark, light
-    }
-    
-    public var mode: Mode = .light
-    
-    
-    public var primaryColor: Color = .BlueberryBlue
+    public var primary: Color = Color("Primary") // Default primary color
     public var newContent: Color = .AvocadoGreen
     public var newNotification: Color = .PaprikaRed
-    
+   
     private init() {}
     
+}
+    /*
     public var background: Color {
         switch mode {
         case .light:
@@ -89,5 +85,5 @@ public class Pallet {
         }
     }
 }
-
+*/
 

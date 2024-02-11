@@ -53,7 +53,7 @@ public struct AvatarView: View {
                     .scaledToFill()
                     .clipShape(Circle())
                     .overlay(
-                        Circle().stroke(🎨.border, lineWidth: width * 0.02)
+                        Circle().stroke(🎨.primary, lineWidth: width * 0.02)
                     )
             case .failure:
                 Image(systemName: "exclamationmark.triangle")
@@ -75,7 +75,7 @@ public struct AvatarView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.white)
-                    .background(Circle().fill(🎨.primaryColor))
+                    .background(Circle().fill(🎨.primary))
                     .frame(width: width * 0.20, height: height * 0.20)
             )
         case .content(let show) where show:
@@ -104,7 +104,7 @@ struct AvatarView_Previews: PreviewProvider {
             Text("Preview")
                 .foregroundColor(.white)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 10).fill(Pallet.shared.primaryColor))
+                .background(RoundedRectangle(cornerRadius: 10).fill(Palette.shared.primary))
             
             AvatarView(
                 imageUrl: defaultImage,
@@ -144,6 +144,6 @@ struct AvatarView_Previews: PreviewProvider {
         }
         .padding()
         .previewLayout(.sizeThatFits)
-        .background(Pallet.shared.background.edgesIgnoringSafeArea(.all))
+        .background(Palette.shared.primary.edgesIgnoringSafeArea(.all))
     }
 }
