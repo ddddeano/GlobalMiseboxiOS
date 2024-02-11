@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - Extension to add custom color definitions
 extension View {
-    var 🎨: Palette {
+    public var 🎨: Palette {
         Palette.shared
     }
 }
