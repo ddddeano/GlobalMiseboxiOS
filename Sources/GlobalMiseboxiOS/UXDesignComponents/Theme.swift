@@ -7,6 +7,25 @@ extension View {
     }
 }
 
+public struct ColorSet {
+    let light: String
+    let dark: String
+    
+    public init(light: String, dark: String) {
+        self.light = light
+        self.dark = dark
+    }
+}
+
+public extension Color {
+    
+    static let Berry = ColorSet(light: "#FF6B6B", dark: "#2E1A33") // primary berry colour
+    static let Mode = ColorSet(light: "#F7F0F7", dark: "#2D262E") // light and dark with a subtle hint of berry
+
+
+
+}
+
 public extension Color {
     static let BlueberryBlue = Color(red: 0.05, green: 0.20, blue: 0.35)
     static let SkyBerryBlue = Color(red: 0.60, green: 0.80, blue: 0.90)
@@ -59,6 +78,7 @@ extension Color {
 public class Palette {
     public static let shared = Palette()
     
+    public var mode: Color = Color("Mode")
     public var primary: Color = Color("Primary")
     public var secondary: Color = Color("Secondary")
     
@@ -68,7 +88,7 @@ public class Palette {
     private init() {}
     
     public var background: LinearGradient {
-        LinearGradient(gradient: Gradient(colors: [primary, primary, secondary, primary]),
+        LinearGradient(gradient: Gradient(colors: [primary, primary, mode, primary]),
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
     }
