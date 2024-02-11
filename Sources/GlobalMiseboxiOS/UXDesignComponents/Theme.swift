@@ -78,7 +78,6 @@ extension Color {
 public class Palette {
     public static let shared = Palette()
     
-    public var mode: Color = Color("Mode")
     public var primary: Color = Color("Primary")
     public var secondary: Color = Color("Secondary")
     
@@ -86,12 +85,6 @@ public class Palette {
     public var newNotification: Color = .PaprikaRed
     
     private init() {}
-    
-    public var background: LinearGradient {
-        LinearGradient(gradient: Gradient(colors: [primary, primary, mode, primary]),
-                       startPoint: .topLeading,
-                       endPoint: .bottomTrailing)
-    }
 }
     /*
     public var background: Color {
