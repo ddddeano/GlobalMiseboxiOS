@@ -59,12 +59,19 @@ extension Color {
 public class Palette {
     static let shared = Palette()
     
-    public var primary: Color = Color("Primary") // Default primary color
+    public var primary: Color = Color("Primary")
+    public var secondary: Color = Color("Secondary")
+    
     public var newContent: Color = .AvocadoGreen
     public var newNotification: Color = .PaprikaRed
-   
+    
     private init() {}
     
+    public var background: LinearGradient {
+        LinearGradient(gradient: Gradient(colors: [primary, primary, secondary, primary]),
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing)
+    }
 }
     /*
     public var background: Color {
