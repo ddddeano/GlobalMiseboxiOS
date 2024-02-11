@@ -57,7 +57,7 @@ extension Color {
 // MARK: - Pallet Singleton for dynamic theme adaptation
 
 public class Palette {
-    static let shared = Palette()
+    public static let shared = Palette()
     
     public var primary: Color = Color("Primary")
     public var secondary: Color = Color("Secondary")
