@@ -10,7 +10,7 @@ import UIKit
 
 public final class Utilities {
     // error on key window here is ok - Nick Sarno
-    static let shared = Utilities()
+    public static let shared = Utilities()
     private init() {}
     
     @MainActor
