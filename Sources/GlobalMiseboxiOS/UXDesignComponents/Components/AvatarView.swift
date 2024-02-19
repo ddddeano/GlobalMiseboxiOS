@@ -75,20 +75,26 @@ public struct AvatarView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.white)
-                    .background(Circle().fill(Color(.blue)))
-                    .frame(width: width * 0.20, height: height * 0.20)
+                    .background(Circle().fill(Color.blue)) // Adjust color as needed
+                    .frame(width: width * 0.30, height: height * 0.30)
             )
         case .content(let show) where show:
             return AnyView(
-                Circle()
-                    .fill(🎨.newContent)
-                    .frame(width: width * 0.20, height: height * 0.20)
+                Image(systemName: "circle")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.white)
+                    .background(Circle().fill(Color.green))
+                    .frame(width: width * 0.30, height: height * 0.30)
             )
         case .notification(let show) where show:
             return AnyView(
-                Circle()
-                    .fill(🎨.newNotification)
-                    .frame(width: width * 0.20, height: height * 0.20)
+                Image(systemName: "circle")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.white)
+                    .background(Circle().fill(Color.red))
+                    .frame(width: width * 0.30, height: height * 0.30)
             )
         default:
             return AnyView(EmptyView())
