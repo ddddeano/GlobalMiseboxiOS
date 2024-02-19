@@ -19,8 +19,8 @@ public struct AvatarView: View {
     var width: CGFloat
     var height: CGFloat
     var env: Env
-    var onTap: () -> Void
-    
+    var onTap: (() -> Void)?
+
     public init(imageUrl: String, width: CGFloat, height: CGFloat, env: Env, onTap: @escaping () -> Void) {
         self.imageUrl = imageUrl
         self.width = width
@@ -38,7 +38,7 @@ public struct AvatarView: View {
                     .offset(x: width * 0.33, y: height * 0.33)
             }
         }
-        .onTapGesture(perform: onTap)
+        .onTapGesture { onTap?() }
         .frame(width: width, height: height)
     }
     
