@@ -6,10 +6,10 @@ public enum Env {
     
     var shouldShow: Bool {
         switch self {
+        case .edit:
+            return true
         case .content(let show), .notification(let show):
             return show
-        case .edit:
-            return false
         }
     }
 }
@@ -53,7 +53,7 @@ public struct AvatarView: View {
                     .scaledToFill()
                     .clipShape(Circle())
                     .overlay(
-                        Circle().stroke(🎨.primary, lineWidth: width * 0.02)
+                        Circle().stroke(Color("MiseboxUser"), lineWidth: width * 0.02)
                     )
             case .failure:
                 Image(systemName: "exclamationmark.triangle")
@@ -75,7 +75,7 @@ public struct AvatarView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.white)
-                    .background(Circle().fill(🎨.primary))
+                    .background(Circle().fill(Color(.blue)))
                     .frame(width: width * 0.20, height: height * 0.20)
             )
         case .content(let show) where show:
@@ -104,7 +104,7 @@ struct AvatarView_Previews: PreviewProvider {
             Text("Preview")
                 .foregroundColor(.white)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 10).fill(Palette.shared.primary))
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color("MiseboxUser")))
             
             AvatarView(
                 imageUrl: defaultImage,
