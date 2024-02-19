@@ -37,7 +37,6 @@ public struct AvatarView: View {
                     .offset(x: width * 0.33, y: height * 0.33)
             }
         }
-        .onTapGesture { onTap?() }
         .frame(width: width, height: height)
     }
     
