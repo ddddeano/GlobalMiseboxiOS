@@ -21,14 +21,13 @@ public struct AvatarView: View {
     var env: Env
     var onTap: (() -> Void)?
 
-    public init(imageUrl: String, width: CGFloat, height: CGFloat, env: Env, onTap: @escaping () -> Void) {
-        self.imageUrl = imageUrl
-        self.width = width
-        self.height = height
-        self.env = env
-        self.onTap = onTap
-    }
-    
+    public init(imageUrl: String, width: CGFloat, height: CGFloat, env: Env, onTap: (() -> Void)? = nil) {
+          self.imageUrl = imageUrl
+          self.width = width
+          self.height = height
+          self.env = env
+          self.onTap = onTap
+      }
     public var body: some View {
         ZStack {
             image()
