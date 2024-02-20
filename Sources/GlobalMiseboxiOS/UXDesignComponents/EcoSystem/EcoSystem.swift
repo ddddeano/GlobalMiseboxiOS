@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-class MiseboxEcosystem {
+public class MiseboxEcosystem {
     public struct Role {
         public let doc: String
         public let collection: String
