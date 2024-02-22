@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MiseboxEcosystem.swift
 //  
 //
 //  Created by Daniel Watson on 20.02.2024.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 public class MiseboxEcosystem {
-    public struct Role {
+    public struct Role: Equatable {
         public let doc: String
         public let collection: String
         public let color: Color
