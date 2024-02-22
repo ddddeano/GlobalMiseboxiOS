@@ -4,23 +4,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "GlobalMiseboxiOS",
+    name: "MiseboxiOSGlobal",
     platforms: [
         .iOS(.v16) // Ensure your platform version is correct
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "GlobalMiseboxiOS",
-            targets: ["GlobalMiseboxiOS"]),
+            name: "MiseboxiOSGlobal",
+            targets: ["MiseboxiOSGlobal"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "GlobalMiseboxiOS"),
+            name: "MiseboxiOSGlobal"),
         .testTarget(
-            name: "GlobalMiseboxiOSTests",
-            dependencies: ["GlobalMiseboxiOS"]),
+            name: "MiseboxiOSGlobalTests",
+            dependencies: ["MiseboxiOSGlobal"]),
     ]
 )
