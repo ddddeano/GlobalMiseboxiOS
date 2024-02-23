@@ -15,6 +15,14 @@ public struct EditToggleImageButton: View {
     let onDone: () async -> Void
     let onCancel: () -> Void
 
+    public init(isEditing: Binding<Bool>, isValid: Bool, onEdit: @escaping () -> Void, onDone: @escaping () async -> Void, onCancel: @escaping () -> Void) {
+          self._isEditing = isEditing
+          self.isValid = isValid
+          self.onEdit = onEdit
+          self.onDone = onDone
+          self.onCancel = onCancel
+      }
+    
     public var body: some View {
         HStack {
             if isEditing {
