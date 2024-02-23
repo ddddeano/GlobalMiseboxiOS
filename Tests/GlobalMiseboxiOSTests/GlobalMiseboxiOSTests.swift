@@ -1,5 +1,5 @@
 import XCTest
-@testable import GlobalMiseboxiOS
+@testable import MiseboxiOSGlobal
 
 final class GlobalMiseboxiOSTests: XCTestCase {
     func testExample() throws {
