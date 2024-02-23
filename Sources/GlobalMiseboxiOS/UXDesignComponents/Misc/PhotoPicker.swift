@@ -9,7 +9,7 @@ import Foundation
 import FirebaseiOSMisebox
 import _PhotosUI_SwiftUI
 
-class PhotosPickerViewModel: ObservableObject {
+public class PhotosPickerViewModel: ObservableObject {
     let firebaseManager = FirestoreManager()
     var documentId: String
     var collectionName: String
