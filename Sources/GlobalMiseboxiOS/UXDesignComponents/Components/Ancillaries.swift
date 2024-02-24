@@ -16,42 +16,6 @@ public enum IconType {
 // MARK: Structs
 
 
-// MARK: Buttons
-
-public struct CircleButton: View {
-    var iconType: IconType
-    var size: CGFloat
-    var background: Color
-    var foregroundColor: Color
-    var strokeColor: Color
-    var action: () -> Void
-    
-    public var body: some View {
-        Button(action: action) {
-            imageForIconType(iconType)
-                .frame(width: size, height: size)
-                .overlay(Circle().stroke(strokeColor, lineWidth: 1)) // Use strokeColor here
-                .background(background)
-                .foregroundColor(foregroundColor)
-                .clipShape(Circle())
-        }
-    }
-    
-    @ViewBuilder
-    private func imageForIconType(_ iconType: IconType) -> some View {
-        switch iconType {
-        case .asset(let name):
-            Image(name)
-                .resizable()
-                .scaledToFit()
-        case .system(let name):
-            Image(systemName: name)
-                .resizable()
-                .scaledToFit()
-                .padding(size / 5) // Adjust padding based on size
-        }
-    }
-}
 
 
 
