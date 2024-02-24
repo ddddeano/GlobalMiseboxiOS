@@ -9,11 +9,12 @@ import Foundation
 import FirebaseiOSMisebox
 import _PhotosUI_SwiftUI
 
-public class PhotosPickerViewModel: ObservableObject {
+public class PhotosPickerVM: ObservableObject {
     let firebaseManager = FirestoreManager()
     var documentId: String
     var collectionName: String
-    @Published var imageSelection: PhotosPickerItem? = nil {
+    
+    @Published public var imageSelection: PhotosPickerItem? = nil {
         didSet {
             Task {
                 await processImageSelection()
