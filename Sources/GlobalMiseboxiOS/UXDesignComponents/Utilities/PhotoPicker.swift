@@ -22,7 +22,7 @@ public class PhotosPickerViewModel: ObservableObject {
     }
     var path = ""
 
-    init(path: String, documentId: String, collectionName: String) {
+    public init(path: String, documentId: String, collectionName: String) {
         self.path = path
         self.documentId = documentId
         self.collectionName = collectionName
