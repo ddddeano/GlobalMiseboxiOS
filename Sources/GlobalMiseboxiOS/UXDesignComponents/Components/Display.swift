@@ -10,6 +10,11 @@ import SwiftUI
 
 public struct SectionTitle: View {
     var title: String
+
+    public init(title: String) {
+        self.title = title
+    }
+
     public var body: some View {
         Text(title.uppercased())
             .font(.caption)
@@ -18,3 +23,4 @@ public struct SectionTitle: View {
             .foregroundColor(.primary)
     }
 }
+
