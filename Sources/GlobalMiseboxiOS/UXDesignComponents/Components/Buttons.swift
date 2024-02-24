@@ -14,14 +14,14 @@ public struct EditToggleImageButton: View {
     let onEdit: () -> Void
     let onDone: () async -> Void
     let onCancel: () -> Void
-
+    
     public init(isEditing: Binding<Bool>, isValid: Bool, onEdit: @escaping () -> Void, onDone: @escaping () async -> Void, onCancel: @escaping () -> Void) {
-          self._isEditing = isEditing
-          self.isValid = isValid
-          self.onEdit = onEdit
-          self.onDone = onDone
-          self.onCancel = onCancel
-      }
+        self._isEditing = isEditing
+        self.isValid = isValid
+        self.onEdit = onEdit
+        self.onDone = onDone
+        self.onCancel = onCancel
+    }
     
     public var body: some View {
         HStack {
@@ -47,6 +47,50 @@ public struct EditToggleImageButton: View {
                         onEdit()
                     }
                 }
+        }
+    }
+}
+public struct CircleButton: View {
+    var iconType: IconType
+    var size: CGFloat
+    var background: Color
+    var foregroundColor: Color
+    var strokeColor: Color
+    var action: () -> Void
+
+    // Public initializer
+    public init(iconType: IconType, size: CGFloat, background: Color, foregroundColor: Color, strokeColor: Color, action: @escaping () -> Void) {
+        self.iconType = iconType
+        self.size = size
+        self.background = background
+        self.foregroundColor = foregroundColor
+        self.strokeColor = strokeColor
+        self.action = action
+    }
+
+    public var body: some View {
+        Button(action: action) {
+            imageForIconType(iconType)
+                .frame(width: size, height: size)
+                .overlay(Circle().stroke(strokeColor, lineWidth: 1))
+                .background(background)
+                .foregroundColor(foregroundColor)
+                .clipShape(Circle())
+        }
+    }
+
+    @ViewBuilder
+    private func imageForIconType(_ iconType: IconType) -> some View {
+        switch iconType {
+        case .asset(let name):
+            Image(name)
+                .resizable()
+                .scaledToFit()
+        case .system(let name):
+            Image(systemName: name)
+                .resizable()
+                .scaledToFit()
+                .padding(size / 5) // Adjust padding based on size
         }
     }
 }
