@@ -73,11 +73,11 @@ extension Color {
     }
 }
 
-struct GradientBackgroundView: View {
+public struct GradientBackgroundView: View {
     @State private var movingGradient = false
     var colors: [Color]
     
-    var body: some View {
+    public var body: some View {
         LinearGradient(
             gradient: Gradient(colors: colors),
             startPoint: movingGradient ? .topLeading : .bottomLeading,

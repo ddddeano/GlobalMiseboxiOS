@@ -9,9 +9,8 @@ import Foundation
 import SwiftUI
 import FirebaseiOSMisebox
 
-class EnvironmentManager {
-    static let shared = EnvironmentManager()
-    var currentEnvironment: EnvironmentConfiguration = .development
-    
+public class EnvironmentManager {
+    public static let shared = EnvironmentManager()
+    public var currentEnvironment: EnvironmentConfiguration = .development
 }
 
