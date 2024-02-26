@@ -32,4 +32,4 @@ public class EnvironmentManager {
 }
 
 // Alias for easier reference
-public typealias Kind = EnvironmentManager
+public typealias Env = EnvironmentManager
