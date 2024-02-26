@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import FirebaseiOSMisebox
 
-public class EnvironmentManager {
+public class EnvironmentManager: ObservableObject {
     public static let env = EnvironmentManager()
     public var mode: EnvironmentConfiguration = .development
     public var welcome = ""
