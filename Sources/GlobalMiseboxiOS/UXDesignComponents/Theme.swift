@@ -73,7 +73,30 @@ extension Color {
     }
 }
 
+struct GradientBackgroundView: View {
+    @State private var movingGradient = false
+    var colors: [Color]
+    
+    var body: some View {
+        LinearGradient(
+            gradient: Gradient(colors: colors),
+            startPoint: movingGradient ? .topLeading : .bottomLeading,
+            endPoint: movingGradient ? .bottomTrailing : .topTrailing
+        )
+        .edgesIgnoringSafeArea(.all)
+        .animation(Animation.easeInOut(duration: 5).repeatForever(autoreverses: true), value: movingGradient)
+        .onAppear {
+            movingGradient.toggle()
+        }
+    }
+}
+
 // MARK: - Pallet Singleton for dynamic theme adaptation
+
+extension Color {
+    static let persianIndigo = Color(hex: "391463")
+    static let lavender = Color(hex: "AA76E5")
+}
 
 public class Palette {
     public static let shared = Palette()

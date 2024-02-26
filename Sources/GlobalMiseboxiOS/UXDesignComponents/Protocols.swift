@@ -11,3 +11,7 @@ public protocol NavigationSection: RawRepresentable, CaseIterable, Identifiable 
     var iconName: String { get }
     var displayName: String { get }
 }
+enum EnvironmentConfiguration {
+    case development
+    case production
+}

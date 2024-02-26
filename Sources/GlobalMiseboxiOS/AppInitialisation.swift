@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
+import FirebaseiOSMisebox
+
+class EnvironmentManager {
+    static let shared = EnvironmentManager()
+    var currentEnvironment: EnvironmentConfiguration = .development
+    
+}
+
