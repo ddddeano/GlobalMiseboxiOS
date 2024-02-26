@@ -11,6 +11,6 @@ import FirebaseiOSMisebox
 
 public class EnvironmentManager {
     public static let shared = EnvironmentManager()
-    public var currentEnvironment: EnvironmentConfiguration = .development
+    public var mode: EnvironmentConfiguration = .development
 }
 
