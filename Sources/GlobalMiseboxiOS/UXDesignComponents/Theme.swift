@@ -77,6 +77,10 @@ public struct GradientBackgroundView: View {
     @State private var movingGradient = false
     var colors: [Color]
     
+    public init(colors: [Color]) {
+          self.colors = colors
+      }
+    
     public var body: some View {
         LinearGradient(
             gradient: Gradient(colors: colors),
