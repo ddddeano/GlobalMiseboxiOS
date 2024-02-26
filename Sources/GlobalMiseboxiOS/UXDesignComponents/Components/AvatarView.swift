@@ -1,5 +1,5 @@
 import SwiftUI
-public enum Env {
+public enum AvatarKind {
     case edit
     case content(show: Bool)
     case notification(show: Bool)
@@ -18,20 +18,20 @@ public struct AvatarView: View {
     var imageUrl: String
     var width: CGFloat
     var height: CGFloat
-    var env: Env
+    var kind: AvatarKind
     var onTap: (() -> Void)?
 
-    public init(imageUrl: String, width: CGFloat, height: CGFloat, env: Env, onTap: (() -> Void)? = nil) {
+    public init(imageUrl: String, width: CGFloat, height: CGFloat, kind: AvatarKind, onTap: (() -> Void)? = nil) {
           self.imageUrl = imageUrl
           self.width = width
           self.height = height
-          self.env = env
+          self.kind = kind
           self.onTap = onTap
       }
     public var body: some View {
         ZStack {
             image()
-            if env.shouldShow {
+            if kind.shouldShow {
                 bubble()
                     .frame(width: width * 0.20, height: height * 0.20)
                     .offset(x: width * 0.33, y: height * 0.33)
@@ -66,7 +66,7 @@ public struct AvatarView: View {
     }
     
     private func bubble() -> some View {
-        switch env {
+        switch kind {
         case .edit:
             return AnyView(
                 Image(systemName: "pencil.circle")
@@ -114,35 +114,35 @@ struct AvatarView_Previews: PreviewProvider {
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .edit,
+                kind: .edit,
                 onTap: { print("Edit Avatar tapped") }
             )
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .content(show: true),
+                kind: .content(show: true),
                 onTap: { print("Content (show: true) Avatar tapped") }
             )
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .content(show: false),
+                kind: .content(show: false),
                 onTap: { print("Content (show: false) Avatar tapped") }
             )
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .notification(show: true),
+                kind: .notification(show: true),
                 onTap: { print("Notification (show: true) Avatar tapped") }
             )
             AvatarView(
                 imageUrl: defaultImage,
                 width: 100,
                 height: 100,
-                env: .notification(show: false),
+                kind: .notification(show: false),
                 onTap: { print("Notification (show: false) Avatar tapped") }
             )
         }
