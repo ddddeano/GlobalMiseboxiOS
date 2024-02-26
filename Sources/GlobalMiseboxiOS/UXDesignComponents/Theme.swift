@@ -98,8 +98,8 @@ public struct GradientBackgroundView: View {
 // MARK: - Pallet Singleton for dynamic theme adaptation
 
 extension Color {
-    static let persianIndigo = Color(hex: "391463")
-    static let lavender = Color(hex: "AA76E5")
+    public static let persianIndigo = Color(hex: "391463")
+    public static let lavender = Color(hex: "AA76E5")
 }
 
 public class Palette {
