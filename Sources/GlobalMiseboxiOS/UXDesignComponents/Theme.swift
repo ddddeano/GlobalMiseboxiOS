@@ -100,6 +100,9 @@ public struct GradientBackgroundView: View {
 extension Color {
     public static let persianIndigo = Color(hex: "391463")
     public static let lavender = Color(hex: "AA76E5")
+    
+    public static let britishRacingGreen = Color(hex: "143E22")
+    public static let teaGreen = Color(hex: "D6E4A6")
 }
 
 public class Palette {
