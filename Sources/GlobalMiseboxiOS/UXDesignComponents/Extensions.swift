@@ -39,7 +39,6 @@ public struct ProfileCardStyle: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity)
-            .frame(height: 230)
             .background(backgroundColor)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
