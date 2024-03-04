@@ -10,7 +10,7 @@ import FirebaseiOSMisebox
 import _PhotosUI_SwiftUI
 
 public class PhotosPickerVM: ObservableObject {
-    let firebaseManager = FirestoreManager()
+    let firebaseManager: FirestoreManager
     var documentId: String
     var collectionName: String
     
@@ -27,6 +27,7 @@ public class PhotosPickerVM: ObservableObject {
         self.path = path
         self.documentId = documentId
         self.collectionName = collectionName
+        self.firebaseManager = FirestoreManager()
     }
 
     private func processImageSelection() async {

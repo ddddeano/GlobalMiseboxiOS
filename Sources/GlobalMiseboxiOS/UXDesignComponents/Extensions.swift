@@ -46,6 +46,7 @@ public struct ProfileCardStyle: ViewModifier {
                     .stroke(borderColor, lineWidth: borderWidth)
             )
             .cornerRadius(cornerRadius)
+            .padding()
     }
 }
 
