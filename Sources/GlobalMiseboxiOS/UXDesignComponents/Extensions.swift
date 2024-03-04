@@ -20,3 +20,24 @@ extension Color {
         self.init(red: red, green: green, blue: blue)
     }
 }
+
+
+public struct ProfileCardStyle: ViewModifier {
+    var borderColor: Color = .purple
+    var borderWidth: CGFloat = 1
+    var backgroundColor: Color = Color.purple.opacity(0.1)
+
+    var cornerRadius: CGFloat = 12
+
+    public func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .frame(height: 230)
+            .background(backgroundColor)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(borderColor, lineWidth: borderWidth)
+            )
+            .cornerRadius(cornerRadius)
+    }
+}
