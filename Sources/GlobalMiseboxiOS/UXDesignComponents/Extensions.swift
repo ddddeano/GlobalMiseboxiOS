@@ -23,11 +23,18 @@ extension Color {
 
 
 public struct ProfileCardStyle: ViewModifier {
-    var borderColor: Color = .purple
-    var borderWidth: CGFloat = 1
-    var backgroundColor: Color = Color.purple.opacity(0.1)
+    var borderColor: Color
+    var borderWidth: CGFloat
+    var backgroundColor: Color
+    var cornerRadius: CGFloat
 
-    var cornerRadius: CGFloat = 12
+    // Public initializer
+    public init(borderColor: Color = .purple, borderWidth: CGFloat = 1, backgroundColor: Color = Color.purple.opacity(0.1), cornerRadius: CGFloat = 12) {
+        self.borderColor = borderColor
+        self.borderWidth = borderWidth
+        self.backgroundColor = backgroundColor
+        self.cornerRadius = cornerRadius
+    }
 
     public func body(content: Content) -> some View {
         content
@@ -41,3 +48,4 @@ public struct ProfileCardStyle: ViewModifier {
             .cornerRadius(cornerRadius)
     }
 }
+
