@@ -41,16 +41,17 @@ public struct ProfileView<Section: ProfileSection, Destination: View>: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .contentShape(Rectangle())
-                    .navigationDestination(for: Section.self) { section in
-                        destinationView(section)
-                    }
                 }
                 .sectionStyle(borderColor: env.appLight)
             }
             .padding()
         }
+        .navigationDestination(for: Section.self) { section in
+            destinationView(section)
+        }
         .pageStyle(backgroundColor: env.appDark.opacity(0.1))
     }
+
 
     @ViewBuilder
     private func iconView(systemName: String) -> some View {
