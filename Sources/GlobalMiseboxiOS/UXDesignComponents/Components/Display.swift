@@ -24,3 +24,17 @@ public struct SectionTitle: View {
     }
 }
 
+public struct MainTopView: View {
+    var title: String
+    var subtitle: String
+
+    public var body: some View {
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.headline)
+            Text(subtitle)
+                .font(.subheadline)
+            Divider().padding(.trailing)
+        }
+    }
+}
