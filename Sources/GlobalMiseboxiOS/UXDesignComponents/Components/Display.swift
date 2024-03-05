@@ -23,10 +23,14 @@ public struct SectionTitle: View {
             .foregroundColor(.primary)
     }
 }
-
 public struct MainTopView: View {
-    var title: String
-    var subtitle: String
+    public var title: String
+    public var subtitle: String
+
+    public init(title: String, subtitle: String) {
+        self.title = title
+        self.subtitle = subtitle
+    }
 
     public var body: some View {
         VStack(alignment: .leading) {
