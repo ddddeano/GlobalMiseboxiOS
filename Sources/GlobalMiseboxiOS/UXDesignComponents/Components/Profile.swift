@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import MiseboxiOSGlobal
-import MiseboxiOS
 
 public protocol ProfileSection: CaseIterable, Identifiable, Hashable, RawRepresentable where RawValue == String {
     var iconName: String { get }
