@@ -29,6 +29,10 @@ public struct GradientBackgroundView: View {
 import SwiftUI
 
 extension Color {
+    
+    // Misebox Global Colors
+    public static let goldenNugget = Color(hex: "FFCC80")
+
     // Misebox User Colors
     public static let persianIndigo = Color(hex: "391463")
     public static let lavender = Color(hex: "AA76E5")

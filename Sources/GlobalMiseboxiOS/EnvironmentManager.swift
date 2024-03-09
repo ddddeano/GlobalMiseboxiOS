@@ -17,6 +17,7 @@ public class EnvironmentManager: ObservableObject {
     public var smallPrint = ""
     public var appLight: Color
     public var appDark: Color
+    public var softWarning: Color = .goldenNugget
     
     private init() {
         // Initialize with default colors
