@@ -7,10 +7,6 @@
 
 import Foundation
 
-public protocol NavigationSection: RawRepresentable, CaseIterable, Identifiable where RawValue == String {
-    var iconName: String { get }
-    var displayName: String { get }
-}
 public enum EnvironmentConfiguration {
     case development
     case production
